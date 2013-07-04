@@ -1,0 +1,12 @@
+#!/bin/sh
+
+PACKAGE=`aapt dump badging $1 | grep package | sed "s/.*name='\([^']*\).*/\1/"`
+ACTIVITY=`aapt dump badging $1 | grep launchable-activity | sed "s/.*name='\([^']*\).*/\1/"`
+
+echo "Installing $1, package $PACKAGE"
+
+adb install $1
+
+echo "Starting activity $ACTIVITY"
+
+adb shell am start -a android.intent.action.MAIN -n $PACKAGE/$ACTIVITY

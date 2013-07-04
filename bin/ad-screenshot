@@ -1,0 +1,47 @@
+#!/bin/sh
+
+DEFAULT_FILENAME="device-$(date +%Y-%m-%d-%H%M%S).png"
+
+filename=$DEFAULT_FILENAME
+open_flag=
+
+usage()
+{
+cat << EOF
+usage: $0 options [<filename.png>]
+
+This script automates Android screenshots from a device connected over adb.
+
+OPTIONS:
+   -h      Show this message
+   -o      Open the screenshot after saving
+EOF
+}
+
+while getopts "ho" OPTION
+do
+     case $OPTION in
+         h)
+             usage
+             exit 1
+             ;;
+         o)
+             open_flag=1
+             ;;
+         ?)
+             usage
+             exit
+             ;;
+     esac
+done
+
+shift $(($OPTIND -1))
+if [ ! -z $1 ] ; then
+    filename=$1
+fi
+
+adb shell screencap -p /sdcard/$filename; adb pull /sdcard/$filename &>/dev/null; adb shell rm /sdcard/$filename
+
+if [ ! -z $open_flag ] ; then
+  open $filename
+fi
