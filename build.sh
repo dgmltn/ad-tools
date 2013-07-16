@@ -1,6 +1,6 @@
 #!/bin/bash
 
-files="src/util.sh src/launch.sh src/tasks.sh src/screenshot.sh src/main.sh"
+files="src/util.sh src/launch.sh src/tasks.sh src/screenshot.sh src/dex.sh src/main.sh"
 target="bin/ad"
 
 echo "#!/bin/bash" > $target

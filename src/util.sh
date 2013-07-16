@@ -9,6 +9,7 @@ The following is the list of available commands:
     launch: Launch activity given apk
     tasks: task information for running app
     screenshot: take a screenshot
+    dexstats: Get method stats per packagefor a dex file
 EOF
 }
 

@@ -13,6 +13,10 @@ case $1 in
         shift
         screenshot $*
         ;;
+    dexstats )
+        shift
+        dexstats $*
+        ;;
     help )
         shift
         if [ $# -eq 0 ] ; then
@@ -20,5 +24,8 @@ case $1 in
         else
             usage_$1
         fi
+        ;;
+    * )
+        usage
         ;;
 esac
