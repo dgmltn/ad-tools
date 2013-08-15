@@ -49,3 +49,8 @@ function check_file() {
     fi
 }
 
+# Find only leaf directories
+function find_leaves() {
+    find $* -type d | sort | awk '$0 !~ last "/" {print last} {last=$0} END {print last}'
+}
+
